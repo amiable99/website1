@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+	<title>practice3 caculator</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<meta charset="utf-8"/>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet"/>
+	<style>
+		html, body
+		{
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+			border: 0px;
+			padding: 0px;
+			overflow-y: hidden;
+		}
+		td
+		{
+			text-align:center;		
+		}
+		.cell1
+		{
+			width: 80px;
+			height: 80px;
+			color: black;
+			font-size: 20pt;
+			font-weight: bold;			
+			background: gray;
+		}
+		#output {
+			font-size: 36pt;
+			font-weight: bold;
+		}
+		
+	</style>
+</head>
+<body>
+	<form name="form_calculator" method="post" target="_blank">
+		<table style="width:800px; height:100px; margin:50px auto; border:2px solid blue;">
+			<tr>
+				<td>
+					<div id="output"></div>
+ 				</td>
+			</tr>
+		</table>
+		<table style="width:800px; height:400px; margin:20px auto; border:2px solid gray;">
+			<tr>
+				<td>
+					<table style="margin:auto;">
+						<tr>
+							<td>
+								<input name="k7" class="cell1" type="button" value="7"	onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k8" class="cell1" type="button" value="8"	onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k9" class="cell1" type="button" value="9"	onclick="input_data(value)"/>
+							</td>						
+						</tr>
+						<tr>
+							<td>
+								<input name="k4" class="cell1" type="button" value="4"	onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k5" class="cell1" type="button" value="5"	onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k6" class="cell1" type="button" value="6"	onclick="input_data(value)"/>
+							</td>						
+						</tr>
+						<tr>
+							<td>
+								<input name="k1" class="cell1" type="button" value="1"	onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k2" class="cell1" type="button" value="2"	onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k3" class="cell1" type="button" value="3"	onclick="input_data(value)"/>
+							</td>						
+						</tr>
+						<tr>
+							<td>
+							</td>
+							<td>		
+								<input name="k0" class="cell1"  type="button" value="0"	onclick="input_data(value)"/>
+							</td>							
+						</tr>		
+					</table>
+				</td>
+				<td>
+					<table style="margin:auto;">
+						<tr>
+							<td>
+								<input name="div" class="cell1"  type="button" value="/"	onclick="input_operator(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="mul" class="cell1"  type="button" value="*"	onclick="input_operator(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="sub" class="cell1"  type="button" value="-"	onclick="input_operator(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="add" class="cell1"  type="button" value="+"	onclick="input_operator(value)"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script>
+		var fst_k = -1
+		var oper = 'X'
+		var snd_k = -1
+		var ans
+		var count = 1
+		
+		function input_data(k) {
+			if (fst_k == -1 || oper == 'X') {
+				fst_k = k
+				document.getElementById("output").innerHTML = fst_k
+				return
+			}
+			if (snd_k == -1) {
+				snd_k = k
+				switch (oper) {
+					case '/':
+						ans = fst_k / snd_k
+						break;
+					case '*':
+						ans = fst_k * snd_k
+						break;
+					case '-':
+						ans = fst_k - snd_k
+						break;
+					case '+':
+						ans = parseInt(fst_k) + parseInt(snd_k)
+						break;
+				}
+				document.getElementById("output").innerHTML = fst_k + ' ' + oper + ' ' + snd_k + ' = ' + ans
+				fst_k = -1
+				oper = 'X'
+				snd_k = -1
+				return
+			}
+		}
+		function input_operator(o) {
+			if (fst_k == -1) {
+				alert("숫자를 입력하세요")
+				return			
+			}
+			oper = o
+			document.getElementById("output").innerHTML = fst_k + ' ' + oper
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+	<title> Calculator </title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta charset="utf-8"/>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+	<style>
+		html, body
+		{
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+			border: 0px;
+			padding: 0px;
+			overflow-y: hidden; 
+			background: #212121;
+		}
+		td
+		{
+			text-align: center;
+		}
+		.cell1
+		{	
+			width: 85px;
+			height: 85px;
+			color: white;
+			font-size: 33px;	
+			background: #494949;
+		}
+		#output {
+			color: white;
+			font-size: 33pt;
+		}
+		
+	</style>
+</head>
+<body>
+	<form>
+		<table style="width:400px; height:100px; margin:100px auto 5px; border:4px solid #494949;">
+			<tr>
+				<td>	
+					<div id="output"></div>	
+				</td>
+			</tr>
+		</table>
+		<table style="width:400px; height:340px; margin:5px auto; border:4px solid #494949;">
+			<tr>
+				<td>
+					<table style="margin:auto">
+						<tr>
+							<td>
+								<input name="k7" class="cell1" type="button" value="7" onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k8" class="cell1" type="button" value="8" onclick="input_data(value)"/>
+							</td>
+							<td>	
+								<input name="k9" class="cell1" type="button" value="9" onclick="input_data(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="k4" class="cell1" type="button" value="4" onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k5" class="cell1" type="button" value="5" onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k6" class="cell1" type="button" value="6" onclick="input_data(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="k1" class="cell1" type="button" value="1" onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k2" class="cell1" type="button" value="2" onclick="input_data(value)"/>
+							</td>
+							<td>
+								<input name="k3" class="cell1" type="button" value="3" onclick="input_data(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+							<td>
+								<input name="k0" class="cell1" type="button" value="0" onclick="input_data(value)"/>
+							</td>						
+					</table>
+				</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+								<input name="div" class="cell1" type="button" value="/" onclick="input_oper(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="mul" class="cell1" type="button" value="*" onclick="input_oper(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="sub" class="cell1" type="button" value="-" onclick="input_oper(value)"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="add" class="cell1" type="button" value="+" onclick="input_oper(value)"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script>
+		var kfst = -1
+		var ksnd = -1
+		var oper = 'X'
+		var ans
+		
+		function input_data(k){
+			if (kfst == -1 || oper == 'X'){	
+				kfst = k
+				document.getElementById("output").innerHTML = kfst
+				return
+			}
+			if (ksnd == -1){
+				ksnd = k 
+				switch (oper) {
+					case '/':
+						ans = kfst / ksnd
+						break;
+					case '*':
+						ans = kfst * ksnd
+						break;
+					case '-':
+						ans = kfst - ksnd
+						break;
+					case '+':
+						ans = parseInt(kfst) + parseInt(ksnd)
+						break;
+				}
+				document.getElementById("output").innerHTML = kfst + ' ' + oper + ' ' + ksnd + ' = ' + ans
+				kfst = -1
+				ksnd = -1
+				oper = 'X'
+				return
+			}
+		}
+		
+		function input_oper(o){
+			if (kfst == -1){
+				alert("숫자를 입력하세요")
+				return
+			}
+			oper = o
+			document.getElementById("output").innerHTML = kfst + ' ' + oper 
+		}	
+	</script>
+</body>
+</html>
